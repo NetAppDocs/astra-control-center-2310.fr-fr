@@ -1,0 +1,41 @@
+---
+sidebar: sidebar 
+permalink: concepts/choose-class-and-size.html 
+keywords: service level, storage class, storage classes, pv size, persistent volume size, volume size, bandwidth, performance, persistent, volume, kubernetes, containers 
+summary: ASTRA Control Center prend en charge plusieurs systèmes back-end de stockage.  Comprenez comment la classe de stockage et la taille de volume persistant peuvent vous aider à atteindre vos objectifs de performance. 
+---
+= Classes de stockage et taille de volume persistant
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/concepts/
+
+
+[role="lead"]
+ASTRA Control Center prend en charge NetApp ONTAP et Longhorn en tant que systèmes back-end de stockage.
+
+
+
+== Présentation
+
+Le centre de contrôle Astra est compatible avec les éléments suivants :
+
+* *Classes de stockage Astra Trident reposant sur le stockage ONTAP* : si vous utilisez un système back-end ONTAP, Astra Control Center offre la possibilité d'importer le système back-end ONTAP pour générer des rapports sur diverses informations de surveillance.
+* *Classes de stockage CSI soutenues par Longhorn* : vous pouvez utiliser Longhorn avec le pilote Longhorn Container Storage interface (CSI).
+
+
+
+NOTE: Les classes de stockage Astra Trident doivent être préconfigurées en dehors d'Astra Control Center.
+
+
+
+== Classes de stockage
+
+Lorsque vous ajoutez un cluster à Astra Control Center, vous êtes invité à sélectionner une classe de stockage précédemment configurée sur ce cluster comme classe de stockage par défaut. Cette classe de stockage sera utilisée lorsqu'aucune classe de stockage n'est spécifiée dans une demande de volume persistant. La classe de stockage par défaut peut être modifiée à tout moment dans Astra Control Center et toute classe de stockage peut être utilisée à tout moment en spécifiant le nom de la classe de stockage dans le graphique ESV ou Helm. Assurez-vous de n'avoir qu'une seule classe de stockage par défaut définie pour votre cluster Kubernetes.
+
+
+
+== Pour en savoir plus
+
+* https://docs.netapp.com/us-en/trident/index.html["Documentation Astra Trident"^]
+

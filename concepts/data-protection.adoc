@@ -1,0 +1,92 @@
+---
+sidebar: sidebar 
+permalink: concepts/data-protection.html 
+keywords: backup, back up, backup apps, back up apps, snapshots, snapshot an app, take a snapshot, take a backup, view backups, view snapshots, set policy, set schedule, schedule backups, schedule snapshots 
+summary: Découvrez les types de protection des données disponibles dans Astra Control Center, et comment il est préférable de les utiliser pour protéger vos applications. 
+---
+= Protection des données
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/concepts/
+
+
+[role="lead"]
+Découvrez les types de protection des données disponibles dans Astra Control Center, et comment il est préférable de les utiliser pour protéger vos applications.
+
+
+
+== Snapshots, sauvegardes et règles de protection
+
+Les snapshots et les sauvegardes protègent les types de données suivants :
+
+* L'application elle-même
+* Tout volume de données persistant associé à l'application
+* Tous les artefacts de ressource appartenant à l'application
+
+
+Un _snapshot_ est une copie ponctuelle d'une application stockée sur le même volume provisionné que l'application. Ils sont généralement rapides. Vous pouvez utiliser les snapshots locaux pour restaurer l'application à un point antérieur dans le temps. Les copies Snapshot sont utiles pour les clones rapides. Les snapshots incluent tous les objets Kubernetes de l'application, y compris les fichiers de configuration. Les snapshots sont utiles pour le clonage ou la restauration d'une application au sein du même cluster.
+
+Une _sauvegarde_ est basée sur un snapshot. Il est stocké dans le magasin d'objets externe et, par conséquent, peut être plus lent à prendre par rapport aux snapshots locaux. Vous pouvez restaurer une sauvegarde d'application sur le même cluster ou migrer une application en restaurant sa sauvegarde sur un autre cluster. Vous pouvez également choisir une période de conservation plus longue pour les sauvegardes. Les sauvegardes étant stockées dans un référentiel de stockage objet externe, il est généralement plus efficace que les copies Snapshot en cas de panne serveur ou de perte de données.
+
+Une _stratégie de protection_ est un moyen de protéger une application en créant automatiquement des snapshots, des sauvegardes ou les deux en fonction d'un planning que vous définissez pour cette application. Une règle de protection vous permet également de choisir le nombre de snapshots et de sauvegardes à conserver dans la planification, et de définir différents niveaux de granularité de planification. L'automatisation de vos sauvegardes et de vos snapshots à l'aide d'une règle de protection est la meilleure façon de garantir que chaque application est protégée en fonction des besoins de votre organisation et des exigences de votre contrat de niveau de service.
+
+
+CAUTION: _Vous ne pouvez pas être entièrement protégé tant que vous n'avez pas une sauvegarde récente_. Ceci est important, car les sauvegardes sont stockées dans un magasin d'objets à distance des volumes persistants. En cas de défaillance ou d'accident, le cluster et le stockage persistant qui lui est associé doivent être sauvegardées pour être restaurées. Un snapshot ne vous permettrait pas de restaurer.
+
+
+
+=== Sauvegardes immuables
+
+Une sauvegarde immuable est une sauvegarde qui ne peut pas être modifiée ou supprimée au cours d'une période spécifiée. Lorsque vous créez une sauvegarde immuable, Astra Control vérifie que le compartiment que vous utilisez est un compartiment WORM (Write Once, Read Many) et, si oui, vérifie que la sauvegarde est immuable depuis Astra Control.
+ASTRA Control Center prend en charge la création de sauvegardes immuables avec les plateformes et les types de compartiments suivants :
+
+* Amazon Web Services utilisant un compartiment Amazon S3 avec le verrouillage objet S3 configuré
+* NetApp StorageGRID utilisant un compartiment S3 avec verrouillage objet S3 configuré
+
+
+Notez les points suivants lorsque vous travaillez avec des sauvegardes immuables :
+
+* Si vous effectuez une sauvegarde vers un compartiment WORM sur une plateforme non prise en charge ou vers un type de compartiment non pris en charge, vous risquez d'obtenir des résultats imprévisibles, comme la suppression de la sauvegarde, même si le temps de conservation est écoulé.
+* ASTRA Control ne prend pas en charge les politiques de gestion du cycle de vie des données ni la suppression manuelle d'objets dans les compartiments que vous utilisez avec des sauvegardes immuables. Assurez-vous que votre système back-end de stockage n'est pas configuré pour gérer le cycle de vie des snapshots Astra Control ou des données sauvegardées.
+
+
+
+
+== Clones
+
+Un _clone_ est un doublon exact d'une application, de sa configuration et de ses volumes de données persistants. Vous pouvez créer manuellement un clone sur le même cluster Kubernetes ou sur un autre cluster. Le clonage d'une application peut être utile pour déplacer des applications et du stockage d'un cluster Kubernetes vers un autre.
+
+
+
+== Réplication entre les systèmes back-end
+
+Avec Astra Control, vous pouvez assurer la continuité de l'activité de vos applications avec un objectif de point de récupération (RPO) et un objectif de délai de restauration (RTO) faible grâce aux fonctionnalités de réplication asynchrone de la technologie NetApp SnapMirror. Une fois configuré, vos applications peuvent répliquer les modifications des données et des applications d'un système back-end de stockage vers un autre, sur le même cluster ou entre différents clusters.
+
+Vous pouvez répliquer des données entre deux SVM ONTAP sur le même cluster ONTAP ou sur différents clusters ONTAP.
+
+ASTRA Control réplique de manière asynchrone les copies Snapshot d'application vers un cluster de destination. Le processus de réplication inclut les données des volumes persistants répliqués par SnapMirror et les métadonnées d'application protégées par Astra Control.
+
+La réplication d'application est différente de la sauvegarde et de la restauration de l'application de la manière suivante :
+
+* *Réplication d'applications* : Astra Control requiert que les clusters Kubernetes source et de destination (qui peuvent être le même cluster) soient disponibles et gérés avec leurs systèmes back-end de stockage ONTAP respectifs configurés pour activer NetApp SnapMirror. ASTRA Control utilise le Snapshot d'application piloté par des règles et le réplique vers le système de stockage back-end de destination. La technologie SnapMirror de NetApp est utilisée pour répliquer les données de volume persistant. Pour basculer, Astra Control peut rendre l'application répliquée en ligne en recréant les objets d'application sur le cluster Kubernetes de destination avec les volumes répliqués sur le cluster ONTAP de destination. Les données du volume persistant étant déjà présentes sur le cluster ONTAP de destination, Astra Control peut offrir des délais de restauration rapides pour le basculement.
+* *Sauvegarde et restauration des applications* : lors de la sauvegarde des applications, Astra Control crée un snapshot des données d'application et les stocke dans un compartiment de stockage objet. Lorsqu'une restauration est nécessaire, les données du compartiment doivent être copiées sur un volume persistant du cluster ONTAP. Pour réaliser l'opération de sauvegarde et de restauration, le cluster Kubernetes/ONTAP secondaire ne doit pas être disponible et géré, mais la copie de données supplémentaire peut générer des délais de restauration plus longs.
+
+
+Pour savoir comment répliquer des applications, reportez-vous à la section link:../use/replicate_snapmirror.html["Répliquez vos applications sur un système distant grâce à la technologie SnapMirror"].
+
+Les images suivantes présentent le processus de sauvegarde et de restauration planifié par rapport au processus de réplication.
+
+Le processus de sauvegarde copie les données dans des compartiments S3 et les restaure à partir de compartiments S3 :
+
+image:acc-backup_4in.png["Cette image montre une sauvegarde et une restauration planifiées entre deux clusters Kubernetes qui utilisent un compartiment S3"]
+
+Par contre, la réplication s'effectue via la réplication vers ONTAP, puis un basculement crée les ressources Kubernetes :
+
+image:acc-replication_4in.png["Cette image illustre la réplication et le basculement entre deux clusters Kubernetes et deux clusters ONTAP "]
+
+
+
+== Sauvegardes, snapshots et clones avec une licence expirée
+
+Si votre licence expire, vous pouvez ajouter une nouvelle application ou effectuer des opérations de protection des applications (telles que les copies Snapshot, les sauvegardes, les clones et les opérations de restauration) uniquement si l'application que vous ajoutez ou protégez est une autre instance d'Astra Control Center.

@@ -1,0 +1,58 @@
+---
+sidebar: sidebar 
+permalink: use/view-clusters.html 
+keywords: view cluster, edit storage class, storage class, cluster storage, cluster overview 
+summary: Après avoir ajouté des clusters à Astra Control Center, vous pouvez afficher des informations détaillées sur le cluster, notamment son emplacement, les nœuds de travail, les volumes persistants et les classes de stockage. Vous pouvez également modifier les classes de stockage par défaut. 
+---
+= Afficher l'état de santé des clusters et gérer les classes de stockage
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/use/
+
+
+[role="lead"]
+Une fois que vous avez ajouté des clusters à gérer par Astra Control Center, vous pouvez afficher des informations détaillées sur le cluster, notamment son emplacement, les nœuds de travail, les volumes persistants et les classes de stockage. Vous pouvez également modifier la classe de stockage par défaut des clusters gérés.
+
+
+
+== Afficher les détails et l'état de santé des clusters
+
+Vous pouvez afficher des informations détaillées sur le cluster, telles que son emplacement, les nœuds de travail, les volumes persistants et les classes de stockage.
+
+.Étapes
+. Dans l'interface utilisateur du Centre de contrôle Astra, sélectionnez *clusters*.
+. Sur la page *clusters*, sélectionnez le cluster dont vous souhaitez afficher les détails.
++
+
+NOTE: Si un cluster se trouve dans le `removed` État et pourtant, la connectivité cluster et réseau semble saine (les tentatives externes d'accès au cluster via les API Kubernetes sont réussies). Le kubeconfig que vous avez fourni au contrôle Astra pourrait ne plus être valide. Cela peut être dû à une rotation ou à une expiration du certificat sur le cluster. Pour corriger ce problème, mettez à jour les informations d'identification associées au cluster dans Astra Control à l'aide du https://docs.netapp.com/us-en/astra-automation["API de contrôle Astra"].
+
+. Consultez les informations sur les onglets *Présentation*, *stockage* et *activité* pour trouver les informations que vous recherchez.
++
+** *Présentation* : détails sur les nœuds de travail, y compris leur état.
+** *Stockage* : volumes persistants associés au calcul, y compris la classe et l'état du stockage.
+** *Activité* : affiche les activités liées au cluster.
+
+
+
+
+
+NOTE: Vous pouvez également afficher les informations du groupe d'instruments à partir du Centre de contrôle Astra *Tableau de bord*. Dans l'onglet *clusters* sous *Résumé des ressources*, vous pouvez sélectionner les clusters gérés, qui vous permettent d'accéder à la page *clusters*. Après avoir accédé à la page *clusters*, suivez les étapes décrites ci-dessus.
+
+
+
+== Modifiez la classe de stockage par défaut
+
+Vous pouvez modifier la classe de stockage par défaut d'un cluster. Lorsque Astra Control gère un cluster, il conserve le suivi de la classe de stockage par défaut du cluster.
+
+
+NOTE: Ne modifiez pas la classe de stockage à l'aide des commandes kubectl. Utilisez plutôt cette procédure. Astra Control va rétablir les modifications si elles ont été effectuées à l'aide de kubectl.
+
+.Étapes
+. Dans l'interface utilisateur Web Astra Control Center, sélectionnez *clusters*.
+. Sur la page *clusters*, sélectionnez le cluster que vous souhaitez modifier.
+. Sélectionnez l'onglet *stockage*.
+. Sélectionnez la catégorie *classes de stockage*.
+. Sélectionnez le menu *actions* pour la classe de stockage que vous souhaitez définir par défaut.
+. Sélectionnez *définir comme valeur par défaut*.
+
