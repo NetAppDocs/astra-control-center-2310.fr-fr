@@ -487,6 +487,18 @@ spec:
   accountName: "Example"
   *astraVersion: "[Version number]"*
 ----
+. Modifier le numéro de version de l'Astra (`astraVersion` intérieur de `spec`) de `23.07.0` à `23.10.0`:
++
+
+NOTE: Vous ne pouvez pas effectuer une mise à niveau directement à partir d'une version qui est à au moins deux versions derrière la version actuelle. Pour obtenir la liste complète des versions publiées, reportez-vous au link:../release-notes/whats-new.html["notes de version"].
+
++
+[listing, subs="+quotes"]
+----
+spec:
+  accountName: "Example"
+  *astraVersion: "[Version number]"*
+----
 . Vérifiez que le chemin du registre d'images correspond au chemin du registre vers lequel vous avez poussé les images dans un <<Ajoutez les images à votre registre local,étape précédente>>. Mise à jour `imageRegistry` intérieur de `spec` si le registre a changé depuis votre dernière installation.
 +
 [listing]
