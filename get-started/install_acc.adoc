@@ -542,7 +542,7 @@ REMARQUE : ne pas utiliser `http://` ou `https://` dans l'adresse. Copier ce FQD
 .<code>autoSupport</code>
 [%collapsible]
 ====
-Vos sélections dans cette section déterminent si vous allez participer à l'application de support proactif de NetApp, à NetApp Active IQ et à l'endroit où les données seront envoyées. Une connexion Internet est requise (port 442) et toutes les données de support sont anonymisées.
+Vos sélections dans cette section déterminent si vous participerez à l'application de support proactif de NetApp, au conseiller numérique et à l'emplacement où les données sont envoyées. Une connexion Internet est requise (port 442) et toutes les données de support sont anonymisées.
 
 |===
 | Réglage | Utiliser | Guidage | Type | Exemple 
