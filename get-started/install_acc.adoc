@@ -22,7 +22,7 @@ Pour installer Astra Control Center, téléchargez le bundle d'installation depu
 
 
 ====
-Pour une démonstration du processus d'installation d'Astra Control Center, reportez-vous à la section https://www.youtube.com/watch?v=eurMV80b0Ks&list=PLdXI3bZJEw7mJz13z7YdiGCS6gNQgV_aN&index=5["vidéo"^].
+Pour une démonstration du processus d'installation d'Astra Control Center, reportez-vous àla section https://www.youtube.com/watch?v=kfmQDqPi9fU&list=PLdXI3bZJEw7mJz13z7YdiGCS6gNQgV_aN&index=5["vidéo"^].
 
 .Avant de commencer
 * *Respecter les conditions préalables environnementales* : link:requirements.html["Avant de commencer l'installation, préparez votre environnement pour le déploiement d'Astra Control Center"].

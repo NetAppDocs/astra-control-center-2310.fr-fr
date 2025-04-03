@@ -2426,7 +2426,6 @@ ASTRA Control peut désormais gérer des applications sauvegardées par des volu
   <block id="7c90d436f62a080a98e02874957865e0" category="inline-link-macro">ces procédures</block>
   <block id="41bdd90cead20f2dddf0647e2f48fc13" category="list-text">*Installer dans le Cloud public avec Cloud Volumes ONTAP backend*: Utiliser <block ref="cdbba4f6294205e74dc04d0ee99d1d1f" category="inline-link-macro-rx"></block> Pour installer Astra Control Center dans Amazon Web Services (AWS), Google Cloud Platform (GCP) ou Microsoft Azure avec un système de stockage principal Cloud Volumes ONTAP.</block>
   <block id="201e09e85ad81db8a19ef9f20c05d1a5" category="inline-link">vidéo</block>
-  <block id="259f3be9b6c8eefb44e844c2b70333dc" category="paragraph">Pour une démonstration du processus d'installation d'Astra Control Center, reportez-vous à la section<block ref="cbbdec23221803dc148346abe5a297c0" category="inline-link-rx"></block>.</block>
   <block id="2b305f607904d67cd2da521366334e8c" category="inline-link-macro">Avant de commencer l'installation, préparez votre environnement pour le déploiement d'Astra Control Center</block>
   <block id="748a7a1711b184c4e02102a84264406d" category="list-text">*Respecter les conditions préalables environnementales* : <block ref="689b20f2e0a9cb0a12bc48475b3f81ee" category="inline-link-macro-rx"></block>.</block>
   <block id="f96c06e8efd6770cb5f76e8c3aa4238f" category="admonition">Déployez Astra Control Center dans un troisième domaine de panne ou sur un site secondaire. Cela est recommandé pour la réplication d'applications et la reprise sur incident transparente.</block>
@@ -3527,4 +3526,5 @@ ASTRA Trident est automatiquement installé dans le cadre du processus d'importa
   <block id="a9cf730f8ab04a5b52f1d19c74c1483c" category="paragraph">ASTRA Control Center est entièrement intégré à l'écosystème AutoSupport et Active IQ Digital Advisor (également appelé Digital Advisor) pour fournir aux utilisateurs et au support NetApp des informations sur le dépannage et l'utilisation.</block>
   <block id="d89b38e0f587f8fa359a431abd35bb40" category="paragraph">Vos sélections dans cette section déterminent si vous participerez à l'application de support proactif de NetApp, au conseiller numérique et à l'emplacement où les données sont envoyées. Une connexion Internet est requise (port 442) et toutes les données de support sont anonymisées.</block>
   <block id="3cf9bc07c0ae31018d3336b8f32de6c8" category="list-text">Utilisez Digital Advisor.</block>
+  <block id="285c7fb54a928cf8e9ca78a83740ce60" category="paragraph">Pour une démonstration du processus d'installation d'Astra Control Center, reportez-vous àla section<block ref="d97427b76746d487a682c110ed41c817" category="inline-link-rx"></block>.</block>
 </blocks>
